@@ -15,7 +15,7 @@ leggi_float() Legge un numero decimale , Gestisce input errati
 leggi_stringa_non_vuota() Chiede una stringa finché non è vuota'''
 
 import random
-
+import re
 
 def leggi_intero():
     while True:
@@ -58,5 +58,31 @@ def leggi_intero_min_max():
 
 #leggi_intero_min_max()
 #print(leggi_intero_min_max())
+
+
+
+
+'''leggi_float() Legge un numero decimale , Gestisce input errati'''
+
+#bisogna controllare tutti gli inserimenti, e assicurarci che il parametro inserito dall'utente contenga il .
+
+def leggi_float():
+    while True:
+        put = input("inserisci un numero decimale es: 10.5 -->")
+        if put.startswith(("-", "+")):
+            dec = float(put)
+            print(f"{dec} primo if")
+        else:
+            dec = put.isdecimal()
+            print(f"{dec} secondo if")
+        if dec is True:
+            for c in put:
+                print(c)
+                if c == ".":
+                    print("c'è il punto '.'")
+
+leggi_float()
+
+
 
 
