@@ -66,22 +66,51 @@ def leggi_intero_min_max():
 
 #bisogna controllare tutti gli inserimenti, e assicurarci che il parametro inserito dall'utente contenga il .
 
+'''def isfloat(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False'''   
+
 def leggi_float():
+    while True:
+        valido = True
+        s = input("inserisci un numero decimale es: 10.5 -->: ")
+        if s.startswith(("-","+")):
+            fl = s[1:]
+        else:
+            fl = s
+        if fl.count(".") <= 1:
+            list = fl.split(".")
+            for n in list:
+                if not (n.isdigit() and n != ""):
+                    valido = False
+                    print("devi inserire un float valido!")
+                    break
+            if valido is True:
+                return float(s)
+
+leggi_float()
+
+
+
+
+
+
+'''def leggi_float():
     while True:
         put = input("inserisci un numero decimale es: 10.5 -->")
         if put.startswith(("-", "+")):
-            dec = float(put)
-            print(f"{dec} primo if")
+            dec = isfloat(put)
         else:
-            dec = put.isdecimal()
-            print(f"{dec} secondo if")
+            dec = isfloat(put)
         if dec is True:
-            for c in put:
-                print(c)
-                if c == ".":
-                    print("c'è il punto '.'")
+            print("ho un float")
+        else:
+            print("non ho un float")'''
 
-leggi_float()
+'''leggi_float()'''
 
 
 
