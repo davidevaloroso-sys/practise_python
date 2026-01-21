@@ -66,6 +66,7 @@ def leggi_intero_min_max():
 
 #bisogna controllare tutti gli inserimenti, e assicurarci che il parametro inserito dall'utente contenga il .
 
+#alternativa definendo funzione isfloat(), ma basta usare try & except direttamente nella funzione leggi_float()"insensato"
 '''def isfloat(s):
     try:
         float(s)
@@ -91,13 +92,9 @@ def leggi_float():
             if valido is True:
                 return float(s)
 
-leggi_float()
+'''leggi_float()'''
 
-
-
-
-
-
+# alternativa non valida.
 '''def leggi_float():
     while True:
         put = input("inserisci un numero decimale es: 10.5 -->")
@@ -112,6 +109,22 @@ leggi_float()
 
 '''leggi_float()'''
 
+
+
+
+
+'''leggi_stringa_non_vuota() Chiede una stringa finché non è vuota'''
+
+def leggi_stringa_non_vuota():
+    while True:
+        s = input("inserisci una stringa, per terminare inserisci una vuota.")
+        if s != "":
+            print("stai inserendo stringhe... continuo...")
+        else:
+            print("hai inserito una stringa vuota... termino il programma...")
+            return 
+
+'''leggi_stringa_non_vuota()'''
 
 
 
