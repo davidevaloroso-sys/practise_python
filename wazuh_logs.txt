@@ -1,0 +1,51 @@
+** Alert 1678912345.1234567: - sshd,authentication_failed,
+2026 Jan 27 09:15:32 (ubuntu-server) 192.168.1.10->/var/log/auth.log
+Rule: 5710 (level 10) -> 'SSHD brute force login attempt.'
+Src IP: 203.0.113.45
+Dst IP: 192.168.1.10
+Src Port: 50432
+Dst Port: 22
+Protocol: tcp
+User: root
+Alert_id: 1678912345.1234567
+Agent ID: 001
+
+** Alert 1678912360.2233445: - sshd,authentication_failed,
+2026 Jan 27 09:16:00 (ubuntu-server) 192.168.1.10->/var/log/auth.log  
+Rule: 5715 (level 12) -> 'Multiple SSHD authentication failures from same IP.' 
+Src IP: 203.0.113.45   
+Dst IP: 192.168.1.10
+Src Port: 50432
+Dst Port: 22
+Protocol: tcp
+User: root
+Location: /var/log/auth.log
+Agent ID: 001
+
+** Alert 1678912401.9988776: - sudo,
+2026 Jan 27 09:16:41 (ubuntu-server) 192.168.1.10->/var/log/auth.log
+Rule: 5402 (level 8) -> 'User privilege escalation using sudo.'
+User: alice
+Command: /usr/bin/apt install nmap
+Location: /var/log/auth.log
+Agent ID: 001
+
+** Alert 1678912500.1112223: - web,apache,
+2026 Jan 27 09:18:20 (web-server) 192.168.1.20->/var/log/apache2/access.log
+Rule: 31151 (level 7) -> 'Possible SQL injection attempt in URL.'
+Src IP: 198.51.100.25
+URL: /index.php?id=1' OR '1'='1
+Method: GET
+HTTP Status: 200
+Location: /var/log/apache2/access.log
+Agent ID: 002
+
+** Alert 1678912555.4455667: - windows,security,
+2026 Jan 27 09:19:15 (win-client01) 10.0.0.15->WinEvtLog
+Rule: 18107 (level 9) -> 'Windows logon failure.'
+Event ID: 4625
+User: DOMAIN\\bob
+Logon Type: 3
+Src IP: 10.0.0.50
+Location: Security
+Agent ID: 010
