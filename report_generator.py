@@ -65,6 +65,7 @@ def generate_report(diz, output_file):
                 ruleid = errore['ruleid']
                 message = errore['message'].strip()
                 file.write(f"{idx}. [{timestamp}] Rule {ruleid} - {message}\n")
+            #aggiunta del write dei log richiesti tramite input su main.py, SE il livello richiesto è != da 'error' allora file.write("restanti logs richiesti:\n")
     except PermissionError:
         print(f"Errore: permesso negato per scrivere il file {output_file}.")
     except FileNotFoundError:

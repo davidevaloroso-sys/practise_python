@@ -1,0 +1,9 @@
+Report of log events:
+Totale eventi: 20
+Info: {'info': 0, 'warning': 12, 'error': 8}
+Primi 5 errori:
+1. [2026 Jan 27 09:15:32 ] Rule 5710 - 'SSHD brute force login attempt.'
+2. [2026 Jan 27 09:16:00 ] Rule 5715 - 'Multiple SSHD authentication failures from same IP.'
+3. [2026 Jan 27 09:16:41 ] Rule 5402 - 'User privilege escalation using sudo.'
+4. [2026 Jan 27 09:19:15 ] Rule 18107 - 'Windows logon failure.'
+5. [2026 Jan 27 09:22:20 ] Rule 5540 - 'File integrity alert: binary modified.'

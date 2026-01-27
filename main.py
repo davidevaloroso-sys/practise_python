@@ -8,25 +8,33 @@ Legga il file di log (passato come argomento da riga di comando)
 Chiami le funzioni per il parsing, il filtraggio e la generazione del report
 Stampi a video un riassunto del report'''
 
+while True:
+    try:
+        file = input("inserisci il nome del file da analizzare, inserisci 0 per uscire: ")
+        if file == "0":
+            break
+        file_letto = leggi_file_log(file)
 
-file = input("inserisci il nome del file da analizzare: ")
+        diz_log = analizza_riga(file_letto)
 
-file_letto = leggi_file_log(file)
+        livello = input("inserisci il livello che vuoi analizzare, inserisci 0 per uscire: ")
+        if livello == "0":
+            break
+        livello_filtrato = filtra_per_livello(diz_log, livello)
 
-diz_log = analizza_riga(file_letto)
+        nome_report = input("inserisci il nome del file di output, inserisci 0 per uscire: ")
+        if nome_report == "0":
+            break
+        report = genera_report(diz_log, nome_report)
+        with open(nome_report, "r") as f:
+            contenuto = f.read()
+            print(contenuto)
+            break
+    except Exception as e:
+        print(e)
 
-livello = input("inserisci il livello che vuoi analizzare: ")
+#l'output sul file generato come report conterrà solo ed esclusivamente i level 'error' perchè come da richiesta, l'out o sarà con i primi 5 level 'error' altrimenti tutti gli error.
 
-livello_filtrato = filtra_per_livello(diz_log, livello)
-
-nome_report = input("inserisci il nome del file di output: ")
-
-report = genera_report(diz_log, nome_report)
-
-
-with open(nome_report, "r") as f:
-    contenuto = f.read()
-    print(contenuto)
 
 
 ####################################################
