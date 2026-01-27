@@ -25,7 +25,6 @@ def count_events_by_level(diz):
     for i in diz:
         level = diz[i]['level']
         event_count[level] += 1
-            
     return event_count
 
 #print(count_events_by_level(parse_log_line(logs)))
@@ -37,30 +36,40 @@ Il conteggio degli eventi per livello
 I primi 5 eventi con livello "error" (se presenti)'''
 
 
-def generate_report(diz, output_file):
-    tot_eventi = len(diz)
-    counts = count_events_by_level(diz)
-    
-    # Filtra gli errori
-    errori = []
-    for i in diz:
-        if diz[i]['level'] == 'error':
-            errori.append(diz[i])
-    
-    # Prendi i primi 5 errori
-    errori_top5 = errori[:5]
-    
-    with open(output_file, 'w') as file:
-        file.write("Report of log events:\n")
-        file.write(f"Totale eventi: {tot_eventi}\n")
-        file.write(f"Info: {count_events_by_level(diz)}\n")
-        
-        file.write("Primi 5 errori:\n")
-        for idx, errore in enumerate(errori_top5, 1):
-            timestamp = errore['timestamp']
-            ruleid = errore['ruleid']
-            message = errore['message'].strip()
-            file.write(f"{idx}. [{timestamp}] Rule {ruleid} - {message}\n")
+######
+#aggiunto try & except per maggiore gestione degli errori.
+######
 
+def generate_report(diz, output_file):
+    try:
+        tot_eventi = len(diz)
+        counts = count_events_by_level(diz)
+        
+        # Filtra gli errori
+        errori = []
+        for i in diz:
+            if diz[i]['level'] == 'error':
+                errori.append(diz[i])
+        
+        # Prendi i primi 5 errori
+        errori_top5 = errori[:5]
+        
+        with open(output_file, 'w') as file:
+            file.write("Report of log events:\n")
+            file.write(f"Totale eventi: {tot_eventi}\n")
+            file.write(f"Info: {count_events_by_level(diz)}\n")
+            
+            file.write("Primi 5 errori:\n")
+            for idx, errore in enumerate(errori_top5, 1):
+                timestamp = errore['timestamp']
+                ruleid = errore['ruleid']
+                message = errore['message'].strip()
+                file.write(f"{idx}. [{timestamp}] Rule {ruleid} - {message}\n")
+    except PermissionError:
+        print(f"Errore: permesso negato per scrivere il file {output_file}.")
+    except FileNotFoundError:
+        print(f"Errore: il percorso del file {output_file} non esiste.")
+    except Exception as e:
+        print(e)
 #print(generate_report(parse_log_line(logs), 'output_log.txt'))
 
