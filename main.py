@@ -35,11 +35,11 @@ while True:
 
 #l'output sul file generato come report conterrà solo ed esclusivamente i level 'error' perchè come da richiesta, l'out o sarà con i primi 5 level 'error' altrimenti tutti gli error.
 
-
+####
 
 ####################################################
 # code made by Valoroso Davide & Francesco D'amelio.
 ####################################################
 
 
-
+####
