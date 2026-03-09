@@ -9,6 +9,7 @@
 try { 
     Remove-Item -Path $outputPath
     Remove-Item -Path $outjson
+    Remove-Item -Path $outjson1
 }
 catch {
     
@@ -18,7 +19,7 @@ Finally {
     Write-Host "Cleanup Completo"
 }
 #elenco servizi + esportazione in CSV 
-$outputPath = "$env:USERPROFILE\practise_python\PS\services.csv"
+$outputPath = "$env:USERPROFILE\VS\practise_python\PS\services.csv"
 Get-Service | Select-Object Name, DisplayName, Status, StartType | Export-Csv -Path $outputPath -NoTypeInformation -Encoding UTF8
 Write-Host "Esportazione completata: $outputPath" -ForegroundColor Green
 #servizi automatici in esecuzione + export su file CSV precedentemente creato
@@ -40,19 +41,22 @@ Get-Service | Where-Object {$_.Status -eq 'Running' -and $_.StartType -eq 'Autom
 #               viene utilizzato quando Controllo account utente è abilitato, l'applicazione non richiede privilegi amministrativi e l'utente 
 #               non sceglie di avviare il programma utilizzando Esegui come amministratore.
 #eventi di sistema e sicurezza
-$outjson = "$env:USERPROFILE\practise_python\PS\events.json"
+$outjson = "$env:USERPROFILE\VS\practise_python\PS\events.json"
 Get-WinEvent -FilterHashtable @{ 
-    LogName = @('Security', 'System') 
+    LogName   = @('Security','System')
     StartTime = (Get-Date).AddDays(-1)
-    id = @('4625', '4720', '4732', '4672', '1102', '4624')
-} | 
-ConvertTo-Json -Depth 10 | 
+    Id        = 4625,4720,4732,4672,1102,4624
+} |
+Select-Object Id, Message, LogName, Level, LevelDisplayName, TaskDisplayName, KeywordsDisplayNames, MachineName,
+    @{Name='TimeCreated'; Expression = { $_.TimeCreated.ToString("o") }} |
+ConvertTo-Json -Depth 10 |
 Out-File $outjson -Encoding utf8
 
 Write-Host "Esportati eventi Security+System ultimi 24h in $outjson"
 #eventi relativi ai servizi
-$Time = (Get-Date).AddHours(-24)
-Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Service Control Manager'; StartTime=$Time} | Format-Table TimeCreated, Message -AutoSize | ConvertTo-Json | Out-File $outjson -Append -Encoding utf8
+$outjson1 = "$env:USERPROFILE\VS\practise_python\PS\events1.json"
+$Time = Get-Date ((Get-Date).AddDays(-1)) -Format "dddd MM/dd/yyyy HH:mm K"
+Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Service Control Manager'; StartTime=$Time} | Format-Table TimeCreated, Message -AutoSize | ConvertTo-Json | Out-File $outjson1 -Encoding utf8
 #eventuali log PowerShell operativi
 Get-WinEvent -FilterHashtable @{
     LogName = 'Microsoft-Windows-PowerShell/Operational'
